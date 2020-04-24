@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Speech Detection</title>
+    <link rel="stylesheet" href="./style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
       rel="stylesheet"
@@ -24,149 +25,7 @@
       <div class="font2" data-val="2">Sample</div>
       <div class="font3" data-val="3">Sample</div>
     </div>
-    <div class="words" contenteditable spellcheck="false">Hello</div>
-
-    <script>
-      window.SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-
-      const recognition = new SpeechRecognition();
-      recognition.interimResults = true;
-
-      let p = document.createElement("p");
-      const words = document.querySelector(".words");
-      words.appendChild(p);
-
-      recognition.addEventListener("result", (e) => {
-        const transcript = Array.from(e.results)
-          .map((result) => result[0].transcript)
-          .join("");
-        p.textContent = transcript;
-        if (e.results[0].isFinal) {
-          p = document.createElement("p");
-          words.appendChild(p);
-        }
-      });
-
-      recognition.addEventListener("end", recognition.start);
-
-      recognition.start();
-
-      const writing = document.querySelector(".writing");
-
-      writing.addEventListener("click", (e) => {
-        document.documentElement.style.setProperty(
-          "--curFont",
-          `var(--font${e.target.dataset.val})`
-        );
-        console.log(e.target.dataset.val);
-      });
-
-      console.log(writing);
-    </script>
-
-    <style>
-      :root {
-        --font1: "Indie Flower";
-        --font2: "Kalam";
-        --font3: "Homemade Apple";
-        --curFont: var(--font1);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        font-size: 62.5%;
-      }
-      body {
-        width: 100%;
-        min-height: 100vh;
-        background: rgb(94, 12, 226);
-        padding: 2rem;
-      }
-      header {
-        font-family: sans-serif;
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 4rem;
-        color: #fff;
-        text-decoration: underline;
-        text-decoration-color: rgb(255, 123, 0);
-      }
-      .writing {
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 2rem;
-        font-size: 2.3rem;
-        width: 100%;
-      }
-      [data-val] {
-        cursor: pointer;
-        background: #fff;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        color: blue;
-        font-weight: 600;
-        line-height: 3rem;
-      }
-      .font1 {
-        font-family: var(--font1);
-      }
-      .font2 {
-        font-family: var(--font2);
-      }
-      .font3 {
-        font-family: var(--font3);
-      }
-      .words {
-        font-family: var(--curFont), sans-serif;
-        font-weight: 600;
-        margin: 0 auto;
-
-        max-width: 60rem;
-        background: #fff;
-        padding: 2rem;
-        border-radius: 0.5rem;
-        font-size: 2rem;
-        box-shadow: 1rem 1rem 0 rgba(0, 0, 0, 0.5);
-        background: linear-gradient(to bottom, blue 0%, white 4%) 0 14px;
-        background-size: 100% 3rem;
-        line-height: 3rem;
-        padding-left: 7rem;
-        position: relative;
-        color: blue;
-      }
-      .words::after {
-        content: "";
-        position: absolute;
-        left: 5rem;
-        top: 0;
-        bottom: 0;
-        width: 0.4rem;
-        height: 100%;
-        border: 1px solid rgb(245, 67, 67);
-        border-top: none;
-        border-bottom: none;
-      }
-      p {
-        margin-bottom: 3rem;
-      }
-      @media only screen and (max-width: 600px) {
-        header {
-          font-size: 3rem;
-        }
-        [data-val] {
-          font-size: 2rem;
-        }
-        p {
-          font-size: 2.3rem;
-        }
-        body {
-          padding: 0.5rem;
-        }
-      }
-    </style>
+    <div class="words" contenteditable spellcheck="false"></div>
+    <script src="./script.js"></script>
   </body>
 </html>
